@@ -4,8 +4,10 @@ import static com.sharkBytesLab.tictactoecoin.R.drawable.*;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.gridlayout.widget.GridLayout;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean gameActive = true;
     private int[] gameState = {2,2,2,2,2,2,2,2,2};
     private int[][] winningState = {{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
+    private ConstraintLayout mainLayout;
 
 
     @Override
@@ -31,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
+
+        mainLayout = findViewById(R.id.mainLayout);
+
+        AnimationDrawable animationDrawable = (AnimationDrawable) mainLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(1500);
+        animationDrawable.setExitFadeDuration(2000);
+        animationDrawable.start();
+
+
     }
 
     public void tapped(View view)
