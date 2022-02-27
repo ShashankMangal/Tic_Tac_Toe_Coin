@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private int[] gameState = {2,2,2,2,2,2,2,2,2};
     private int[][] winningState = {{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
     private ConstraintLayout mainLayout;
+    private Button resetBtn;
 
 
     @Override
@@ -36,11 +38,36 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         mainLayout = findViewById(R.id.mainLayout);
+        resetBtn = findViewById(R.id.resetBtn);
 
         AnimationDrawable animationDrawable = (AnimationDrawable) mainLayout.getBackground();
         animationDrawable.setEnterFadeDuration(1500);
         animationDrawable.setExitFadeDuration(2000);
         animationDrawable.start();
+
+
+        resetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(MainActivity.this, "Game Reset.", Toast.LENGTH_SHORT).show();
+                activePlayer = 0;
+                gameActive = true;
+                for(int i=0;i<gameState.length;i++)
+                {
+                    gameState[i] = 2;
+                }
+                GridLayout grd = findViewById(R.id.gridLayout);
+
+                for(int i=0;i<9;i++)
+                {
+                    ImageView counts = (ImageView) grd.getChildAt(i);;
+                    counts.setImageDrawable(null);
+                }
+
+
+            }
+        });
 
 
     }
