@@ -7,7 +7,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_list"
-    tools:context=".MainActivity">
+    >
+    <com.applovin.mediation.ads.MaxAdView
+        android:id="@+id/applovinAd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        xmlns:maxads="http://schemas.applovin.com/android/1.0"
+        maxads:adUnitId="6f3002c7df6e3587"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+    </com.applovin.mediation.ads.MaxAdView>
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/gridLayout"
@@ -140,5 +150,18 @@
         android:textColor="@color/black"
         android:backgroundTint="@color/white"
         />
+
+    <ImageView
+        android:id="@+id/menu"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="12dp"
+        android:src="@drawable/menu"
+        app:tint="@color/white"
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,16 +7,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.gridlayout.widget.GridLayout;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.applovin.mediation.ads.MaxAdView;
+import com.applovin.sdk.AppLovinSdk;
+import com.applovin.sdk.AppLovinSdkConfiguration;
 import com.sharkBytesLab.tictactoecoin.R.color;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private int[][] winningState = {{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
     private ConstraintLayout mainLayout;
     private Button resetBtn;
+    private ImageView menu;
+    private MaxAdView adView;
 
 
     @Override
@@ -39,12 +47,25 @@ public class MainActivity extends AppCompatActivity {
 
         mainLayout = findViewById(R.id.mainLayout);
         resetBtn = findViewById(R.id.resetBtn);
+        menu = findViewById(R.id.menu);
+        adView = findViewById(R.id.applovinAd);
 
         AnimationDrawable animationDrawable = (AnimationDrawable) mainLayout.getBackground();
         animationDrawable.setEnterFadeDuration(1500);
         animationDrawable.setExitFadeDuration(2000);
         animationDrawable.start();
 
+        // Please make sure to set the mediation provider value to "max" to ensure proper functionality
+        AppLovinSdk.getInstance( this ).setMediationProvider( "max" );
+        AppLovinSdk.initializeSdk( this, new AppLovinSdk.SdkInitializationListener() {
+            @Override
+            public void onSdkInitialized(final AppLovinSdkConfiguration configuration)
+            {
+
+            }
+        } );
+
+        adView.loadAd();
 
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +91,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(MainActivity.this, MenuActivity.class));
+                finish();
+
+            }
+        });
+
+
     }
+
+
 
     public void tapped(View view)
     {
