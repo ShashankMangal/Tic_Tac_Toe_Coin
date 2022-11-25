@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         } );
 
         adView.loadAd();
+        createInterstitialAd();
 
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                    showToast(e.getMessage().toString());
+                   Log.v("Reset Error", e.getMessage().toString());
                 }
 
             }
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         MotionToast.Companion.createColorToast(this,
                 s,
                 "Click on SKIP TIMER",
-                MotionToastStyle.INFO,
+                MotionToastStyle.SUCCESS,
                 MotionToast.GRAVITY_BOTTOM,
                 MotionToast.LONG_DURATION,
                 ResourcesCompat.getFont(this, R.font.helvetica_regular));
@@ -141,13 +143,13 @@ public class MainActivity extends AppCompatActivity {
         MaxAdListener adListener = new MaxAdListener() {
             @Override
             public void onAdLoaded(MaxAd ad) {
-                Log.e("Inter Ad", "Loaded");
+                Log.e("Reset Error", "Loaded");
                 showToast("Reset.");
             }
 
             @Override
             public void onAdDisplayed(MaxAd ad) {
-                Log.e("Inter Ad", "Displayed");
+                Log.e("Reset Error", "Displayed");
             }
 
             @Override
