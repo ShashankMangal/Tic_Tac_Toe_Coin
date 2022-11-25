@@ -5,6 +5,7 @@ import static com.sharkBytesLab.tictactoecoin.R.drawable.*;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.gridlayout.widget.GridLayout;
 
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,10 +22,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.applovin.mediation.MaxAd;
+import com.applovin.mediation.MaxAdListener;
+import com.applovin.mediation.MaxError;
 import com.applovin.mediation.ads.MaxAdView;
+import com.applovin.mediation.ads.MaxInterstitialAd;
 import com.applovin.sdk.AppLovinSdk;
 import com.applovin.sdk.AppLovinSdkConfiguration;
 import com.sharkBytesLab.tictactoecoin.R.color;
+
+import java.util.concurrent.TimeUnit;
+
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private Button resetBtn;
     private ImageView menu;
     private MaxAdView adView;
+    private MaxInterstitialAd interstitialAd;
+    private int retry = 0;
 
 
     @Override
@@ -86,6 +99,13 @@ public class MainActivity extends AppCompatActivity {
                     counts.setImageDrawable(null);
                 }
 
+                try {
+                    if (interstitialAd.isReady()) {
+                        interstitialAd.showAd();
+                    }
+                } catch (Exception e) {
+                   showToast(e.getMessage().toString());
+                }
 
             }
         });
@@ -105,6 +125,61 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void showToast(String s) {
+        MotionToast.Companion.createColorToast(this,
+                s,
+                "Click on SKIP TIMER",
+                MotionToastStyle.INFO,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(this, R.font.helvetica_regular));
+
+    }
+
+    private void createInterstitialAd() {
+        interstitialAd = new MaxInterstitialAd(getResources().getString(R.string.applovin_inter_adId), this);
+        MaxAdListener adListener = new MaxAdListener() {
+            @Override
+            public void onAdLoaded(MaxAd ad) {
+                Log.e("Inter Ad", "Loaded");
+                showToast("Reset.");
+            }
+
+            @Override
+            public void onAdDisplayed(MaxAd ad) {
+                Log.e("Inter Ad", "Displayed");
+            }
+
+            @Override
+            public void onAdHidden(MaxAd ad) {
+
+            }
+
+            @Override
+            public void onAdClicked(MaxAd ad) {
+
+            }
+
+            @Override
+            public void onAdLoadFailed(String adUnitId, MaxError error) {
+                retry++;
+                long delay = TimeUnit.SECONDS.toMillis((long) Math.pow(2, Math.min(6, retry)));
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        interstitialAd.loadAd();
+                    }
+                }, delay);
+            }
+
+            @Override
+            public void onAdDisplayFailed(MaxAd ad, MaxError error) {
+
+            }
+        };
+        interstitialAd.setListener(adListener);
+        interstitialAd.loadAd();
+    }
 
     public void tapped(View view)
     {
