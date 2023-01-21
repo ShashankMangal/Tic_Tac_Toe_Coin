@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAdClicked(MaxAd ad) {
-
+                Toast.makeText(MainActivity.this, "Ok : " + String.valueOf(ad.getRevenue()) + " " + ad.getRevenuePrecision(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
