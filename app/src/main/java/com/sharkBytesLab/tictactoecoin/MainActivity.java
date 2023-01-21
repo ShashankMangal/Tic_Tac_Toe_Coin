@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(MainActivity.this, "Game Reset.", Toast.LENGTH_SHORT).show();
                 activePlayer = 0;
                 gameActive = true;
                 for(int i=0;i<gameState.length;i++)
@@ -144,12 +143,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAdLoaded(MaxAd ad) {
                 Log.e("Reset Error", "Loaded");
-                showToast("Reset.");
             }
 
             @Override
             public void onAdDisplayed(MaxAd ad) {
                 Log.e("Reset Error", "Displayed");
+                Toast.makeText(MainActivity.this, "Ok : " + String.valueOf(ad.getRevenue()) + " " + ad.getRevenuePrecision(), Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -159,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAdClicked(MaxAd ad) {
-                Toast.makeText(MainActivity.this, "Ok : " + String.valueOf(ad.getRevenue()) + " " + ad.getRevenuePrecision(), Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
