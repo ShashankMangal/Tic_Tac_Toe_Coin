@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MaxAdListener{
 
 
     private int activePlayer = 0;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView menu;
     private MaxAdView adView;
     private MaxInterstitialAd interstitialAd;
-    private int retry = 0;
+    private int retryAttempt;
 
 
     @Override
@@ -79,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
         } );
 
         adView.loadAd();
-        createInterstitialAd();
+        interstitialAd = new MaxInterstitialAd( "0ddea73fe38117c5", this );
+        interstitialAd.setListener( this );
+        interstitialAd.loadAd();
 
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,48 +139,50 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void createInterstitialAd() {
-        interstitialAd = new MaxInterstitialAd(getResources().getString(R.string.applovin_inter_adId), this);
-        MaxAdListener adListener = new MaxAdListener() {
+    @Override
+    public void onAdLoaded(final MaxAd maxAd)
+    {
+        // Interstitial ad is ready to be shown. interstitialAd.isReady() will now return 'true'
+        // Reset retry attempt
+        retryAttempt = 0;
+    }
+
+    @Override
+    public void onAdLoadFailed(final String adUnitId, final MaxError error)
+    {
+        // Interstitial ad failed to load
+        // AppLovin recommends that you retry with exponentially higher delays up to a maximum delay (in this case 64 seconds)
+
+        retryAttempt++;
+        long delayMillis = TimeUnit.SECONDS.toMillis( (long) Math.pow( 2, Math.min( 6, retryAttempt ) ) );
+
+        new Handler().postDelayed(new Runnable()
+        {
             @Override
-            public void onAdLoaded(MaxAd ad) {
-                Log.e("Reset Error", "Loaded");
+            public void run()
+            {
+                interstitialAd.loadAd();
             }
+        }, delayMillis );
+    }
 
-            @Override
-            public void onAdDisplayed(MaxAd ad) {
-                Log.e("Reset Error", "Displayed");
-                Toast.makeText(MainActivity.this, "Ok : " + String.valueOf(ad.getRevenue()) + " " + ad.getRevenuePrecision(), Toast.LENGTH_LONG).show();
-            }
+    @Override
+    public void onAdDisplayFailed(final MaxAd maxAd, final MaxError error)
+    {
+        // Interstitial ad failed to display. AppLovin recommends that you load the next ad.
+        interstitialAd.loadAd();
+    }
 
-            @Override
-            public void onAdHidden(MaxAd ad) {
+    @Override
+    public void onAdDisplayed(final MaxAd maxAd) {}
 
-            }
+    @Override
+    public void onAdClicked(final MaxAd maxAd) {}
 
-            @Override
-            public void onAdClicked(MaxAd ad) {
-
-            }
-
-            @Override
-            public void onAdLoadFailed(String adUnitId, MaxError error) {
-                retry++;
-                long delay = TimeUnit.SECONDS.toMillis((long) Math.pow(2, Math.min(6, retry)));
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        interstitialAd.loadAd();
-                    }
-                }, delay);
-            }
-
-            @Override
-            public void onAdDisplayFailed(MaxAd ad, MaxError error) {
-
-            }
-        };
-        interstitialAd.setListener(adListener);
+    @Override
+    public void onAdHidden(final MaxAd maxAd)
+    {
+        // Interstitial ad is hidden. Pre-load the next ad
         interstitialAd.loadAd();
     }
 
