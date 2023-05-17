@@ -196,6 +196,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        maxads:adUnitId="0f6362bc1a8e80d9" />
+        maxads:adUnitId="c9df8d5dab304aef" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

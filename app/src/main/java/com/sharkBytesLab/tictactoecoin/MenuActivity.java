@@ -55,7 +55,7 @@ public class MenuActivity extends AppCompatActivity implements MaxAdListener {
 
 
         binding.applovinAdMenu.loadAd();
-        interstitialAd = new MaxInterstitialAd("82bf2e33f5502575", this);
+        interstitialAd = new MaxInterstitialAd("82fa6f1b27211956", this);
         interstitialAd.setListener(this);
         interstitialAd.loadAd();
 
