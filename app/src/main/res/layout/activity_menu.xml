@@ -1,251 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/theme"
-    tools:context=".MenuActivity"
-    >
+    tools:context=".MenuActivity">
 
-<LinearLayout
-    android:gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    >
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/cameraStudioMenuText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/allInOneEditorMenuText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play joyful.."
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/cameraStudioMenuText"
+        app:layout_constraintTop_toBottomOf="@+id/cameraStudioMenuText" />
+
+    <TextView
         android:id="@+id/share"
-        app:cardBackgroundColor="@color/white"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
-
-        >
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="20dp"
-                android:layout_gravity="center"
-                android:text="Share"
-                android:textColor="@color/theme"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                />
-
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/rate_us"
-        app:cardBackgroundColor="@color/white"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/gradient_blue"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Share"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/version" />
 
-        >
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="20dp"
-                android:layout_gravity="center"
-                android:text="Rate Us"
-                android:textColor="@color/theme"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                />
-
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/rateUs"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/policy"
-        app:cardBackgroundColor="@color/white"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/gradient_blue"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Rate Us"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/share" />
 
-        >
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="20dp"
-                android:layout_gravity="center"
-                android:text="Privacy &amp; Policy"
-                android:textColor="@color/theme"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                />
-
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/update"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/gradient_blue"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Check For Update"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rateUs" />
+
+    <TextView
+        android:id="@+id/privacy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/gradient_blue"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Privacy Policy"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/update" />
+
+    <TextView
         android:id="@+id/terms"
-        app:cardBackgroundColor="@color/white"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/gradient_blue"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Terms &amp; Condition"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privacy" />
 
-        >
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="20dp"
-                android:layout_gravity="center"
-                android:text="Terms &amp; Conditions"
-                android:textColor="@color/theme"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                />
-
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
+    <LinearLayout
+        android:id="@+id/ads_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/feedback"
-        app:cardBackgroundColor="@color/white"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/terms">
 
-        >
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/supportUs"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/gradient_blue"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="Watch Video\nAd"
+            android:textColor="@color/white"
+            android:textSize="19sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="20dp"
-                android:layout_gravity="center"
-                android:text="Feedback"
-                android:textColor="@color/theme"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                />
+        <TextView
+            android:id="@+id/watch_video"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/gradient_blue"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="Rewarded\nAds"
+            android:textColor="@color/white"
+            android:textSize="19sp" />
 
+    </LinearLayout>
 
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/homeButtonMenu"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/supportUs"
-        app:cardBackgroundColor="@color/white"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cameraStudioMenuText"
+        app:srcCompat="@drawable/ic_home"
+        app:tint="@color/theme" />
 
-        >
+    <TextView
+        android:id="@+id/poweredBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="Powered By : Shark Bytes Lab"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@id/applovinAdMenu"
+        app:layout_constraintEnd_toEndOf="@+id/ads_ll"
+        app:layout_constraintStart_toStartOf="@+id/ads_ll"
+        app:layout_constraintTop_toBottomOf="@+id/ads_ll" />
 
-        <LinearLayout
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version : "
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/allInOneEditorMenuText"
+        app:layout_constraintTop_toBottomOf="@+id/allInOneEditorMenuText" />
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="20dp"
-                android:layout_gravity="center"
-                android:text="Watch Video Ad"
-                android:textColor="@color/theme"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                />
-
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
-
-
-
-
+    <com.applovin.mediation.ads.MaxAdView xmlns:maxads="http://schemas.applovin.com/android/1.0"
+        android:id="@+id/applovinAdMenu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        maxads:adUnitId="0f6362bc1a8e80d9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

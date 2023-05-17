@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "485955817870",
+    "project_id": "guard-ffd0d",
+    "storage_bucket": "guard-ffd0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485955817870:android:9a011a4f38d4ceb2ea94df",
+        "android_client_info": {
+          "package_name": "com.sharkBytesLab.tictactoecoin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485955817870-f9b4s9namff36f44ll2f3lmmerhj07io.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHE2EizP7OdVsgzpAEJ9cDSZwKDneQ6nM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "485955817870-f9b4s9namff36f44ll2f3lmmerhj07io.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

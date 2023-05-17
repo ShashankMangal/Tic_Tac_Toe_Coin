@@ -1,7 +1,6 @@
 package com.sharkBytesLab.tictactoecoin;
 
 import static com.sharkBytesLab.tictactoecoin.R.drawable.*;
-
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -20,12 +19,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.unity3d.ads.IUnityAdsInitializationListener;
-import com.unity3d.ads.IUnityAdsLoadListener;
-import com.unity3d.ads.IUnityAdsShowListener;
-import com.unity3d.ads.UnityAds;
-import com.unity3d.services.ads.operation.show.ShowOperation;
-
+import com.applovin.sdk.AppLovinSdk;
+import com.applovin.sdk.AppLovinSdkConfiguration;
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
@@ -42,52 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private String placementId = "Interstitial_Android";
     private String unityGameId = "5238829";
     private boolean testMode = false;
-    IUnityAdsInitializationListener myAdsListener = new IUnityAdsInitializationListener() {
-        @Override
-        public void onInitializationComplete() {
-            Toast.makeText(MainActivity.this, "Ads Initialised", Toast.LENGTH_SHORT).show();
-            UnityAds.load(placementId, loadListener);
-        }
-
-        @Override
-        public void onInitializationFailed(UnityAds.UnityAdsInitializationError error, String message) {
-
-        }
-    };
-
-    IUnityAdsLoadListener loadListener = new IUnityAdsLoadListener() {
-        @Override
-        public void onUnityAdsAdLoaded(String placementId) {
-            Toast.makeText(MainActivity.this, "Ads Loaded", Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onUnityAdsFailedToLoad(String placementId, UnityAds.UnityAdsLoadError error, String message) {
-
-        }
-    };
-
-    IUnityAdsShowListener showListener = new IUnityAdsShowListener() {
-        @Override
-        public void onUnityAdsShowFailure(String placementId, UnityAds.UnityAdsShowError error, String message) {
-
-        }
-
-        @Override
-        public void onUnityAdsShowStart(String placementId) {
-
-        }
-
-        @Override
-        public void onUnityAdsShowClick(String placementId) {
-
-        }
-
-        @Override
-        public void onUnityAdsShowComplete(String placementId, UnityAds.UnityAdsShowCompletionState state) {
-
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        UnityAds.initialize(getApplicationContext(), unityGameId, testMode, myAdsListener);
+        AppLovinSdk.getInstance( this ).setMediationProvider( "max" );
+        AppLovinSdk.initializeSdk( this, new AppLovinSdk.SdkInitializationListener() {
+            @Override
+            public void onSdkInitialized(final AppLovinSdkConfiguration configuration)
+            {
+                // AppLovin SDK is initialized, start loading ads
+            }
+        } );
 
         mainLayout = findViewById(R.id.mainLayout);
         resetBtn = findViewById(R.id.resetBtn);
@@ -123,13 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 {
                     ImageView counts = (ImageView) grd.getChildAt(i);;
                     counts.setImageDrawable(null);
-                }
-
-                try {
-                    UnityAds.show(MainActivity.this, placementId, showListener);
-                } catch (Exception e) {
-                   showToast(e.getMessage().toString());
-                   Log.v("Reset Error", e.getMessage().toString());
                 }
 
             }
